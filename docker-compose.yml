@@ -1,7 +1,12 @@
 services:
   api:
     build: .
-    env_file: .env.example
+    env_file:
+      - .env.example
+      - path: .env
+        required: false
+    environment:
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-120}
     command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
     ports: ["8000:8000"]
     depends_on:
@@ -10,7 +15,10 @@ services:
     restart: unless-stopped
   worker:
     build: .
-    env_file: .env.example
+    env_file:
+      - .env.example
+      - path: .env
+        required: false
     command: celery -A app.workers.celery_app:celery_app worker --loglevel=INFO
     depends_on:
       redis: { condition: service_healthy }
@@ -18,7 +26,10 @@ services:
     restart: unless-stopped
   beat:
     build: .
-    env_file: .env.example
+    env_file:
+      - .env.example
+      - path: .env
+        required: false
     command: celery -A app.workers.celery_app:celery_app beat --loglevel=INFO --schedule=/tmp/celerybeat-schedule
     depends_on:
       redis: { condition: service_healthy }
@@ -26,9 +37,9 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: cryptosage
-      POSTGRES_USER: cryptosage
-      POSTGRES_PASSWORD: cryptosage
+      POSTGRES_DB: ${POSTGRES_DB:-cryptosage}
+      POSTGRES_USER: ${POSTGRES_USER:-cryptosage}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cryptosage}
     volumes: ["postgres-data:/var/lib/postgresql/data"]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U cryptosage -d cryptosage"]

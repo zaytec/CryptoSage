@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import Literal
 
-from pydantic import AnyHttpUrl, Field
+from pydantic import AnyHttpUrl, Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -19,6 +19,18 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:3000,http://localhost:8000"
     rate_limit_per_minute: int = Field(default=120, ge=1, le=10000)
     log_level: str = "INFO"
+
+    @model_validator(mode="after")
+    def reject_insecure_production_settings(self) -> "Settings":
+        insecure_secrets = {
+            "development-secret-change-me-please-123",
+            "replace-with-a-long-random-secret-of-at-least-32-characters",
+        }
+        if self.environment == "production" and self.secret_key in insecure_secrets:
+            raise ValueError("SECRET_KEY must be replaced with a unique production secret")
+        if self.environment == "production" and "*" in self.cors_origin_list:
+            raise ValueError("CORS_ORIGINS must not contain a wildcard in production")
+        return self
 
     @property
     def cors_origin_list(self) -> list[str]:

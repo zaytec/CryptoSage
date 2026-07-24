@@ -40,7 +40,7 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI(title="CryptoSage", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="CryptoSage", version="1.0.0", lifespan=lifespan)
 app.state.limiter = limiter
 app.add_exception_handler(
     RateLimitExceeded, lambda _request, _exc: JSONResponse({"detail": "Rate limit exceeded"}, 429)

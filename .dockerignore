@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+.env
+.pytest_cache
+__pycache__
+*.py[cod]
+*.db
+htmlcov
+.coverage
+test_cryptosage.db
+grafana-data
+prometheus-data
