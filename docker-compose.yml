@@ -19,7 +19,7 @@ services:
   beat:
     build: .
     env_file: .env.example
-    command: celery -A app.workers.celery_app:celery_app beat --loglevel=INFO
+    command: celery -A app.workers.celery_app:celery_app beat --loglevel=INFO --schedule=/tmp/celerybeat-schedule
     depends_on:
       redis: { condition: service_healthy }
     restart: unless-stopped

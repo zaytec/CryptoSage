@@ -37,3 +37,11 @@ def test_portfolio_transaction_requires_owner_and_persists(client):
     assert analytics.status_code == 200
     assert float(analytics.json()["total_market_value"]) == 30000
     assert float(analytics.json()["unrealized_pnl"]) == 4990
+
+
+def test_unknown_portfolio_is_not_disclosed(client):
+    headers = auth_headers(client)
+    response = client.get(
+        "/api/v1/portfolios/00000000-0000-0000-0000-000000000000/analytics", headers=headers
+    )
+    assert response.status_code == 404

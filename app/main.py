@@ -16,6 +16,7 @@ from app.api import auth, market, portfolios, system
 from app.core.cache import CacheService
 from app.core.config import get_settings
 from app.core.database import SessionLocal, create_schema, engine
+from app.models import ApiLog
 from app.services.coingecko import CoinGeckoClient
 from app.services.websocket import ConnectionManager
 
@@ -58,9 +59,23 @@ app.add_middleware(
 async def request_timing(request: Request, call_next):
     started = time.perf_counter()
     response = await call_next(request)
-    response.headers["X-Request-Duration-Ms"] = str(
-        round((time.perf_counter() - started) * 1000, 2)
-    )
+    duration_ms = round((time.perf_counter() - started) * 1000)
+    response.headers["X-Request-Duration-Ms"] = str(duration_ms)
+    if request.url.path != "/metrics":
+        try:
+            async with SessionLocal() as session:
+                session.add(
+                    ApiLog(
+                        method=request.method,
+                        path=request.url.path,
+                        status_code=response.status_code,
+                        duration_ms=duration_ms,
+                    )
+                )
+                await session.commit()
+        except Exception:
+            # Observability must never make a successful request fail.
+            pass
     return response
 
 

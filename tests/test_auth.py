@@ -30,3 +30,10 @@ def test_auth_rejects_invalid_password(client):
         json={"email": "nobody@example.com", "password": "wrong-password-long-enough"},
     )
     assert response.status_code == 401
+
+
+def test_auth_rejects_duplicate_users_and_invalid_refresh_tokens(client):
+    payload = {"email": "repeat@example.com", "password": "correct-horse-battery-staple"}
+    assert client.post("/api/v1/auth/register", json=payload).status_code == 201
+    assert client.post("/api/v1/auth/register", json=payload).status_code == 409
+    assert client.post("/api/v1/auth/refresh", json={"refresh_token": "invalid"}).status_code == 401
