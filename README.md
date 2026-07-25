@@ -18,6 +18,11 @@ Built with **FastAPI • PostgreSQL • Redis • Celery • Docker • Promethe
 
 ---
 
+## 🌍 Live Demo
+
+> Coming soon — deployment to Railway / AWS.
+
+
 ## Contents
 
 - [Overview](#-overview)
@@ -29,6 +34,8 @@ Built with **FastAPI • PostgreSQL • Redis • Celery • Docker • Promethe
 - [Operations](#-operations)
 - [Quality Checks](#-quality-checks)
 - [Documentation](#-documentation)
+
+  
 ## 📖 Overview
 
 CryptoSage is a production-ready cryptocurrency analytics platform built to demonstrate modern backend engineering practices.
@@ -52,6 +59,18 @@ Rather than serving as a simple CRUD application, CryptoSage focuses on producti
 - 🧪 16 automated tests with 92%+ coverage
 
 ---
+
+## 📊 Repository Metrics
+
+| Metric | Value |
+|--------|------:|
+| API Version | v1.0.0 |
+| Python | 3.12 |
+| Automated Tests | 16 |
+| Test Coverage | 92.07% |
+| Docker Services | 7 |
+| API Documentation | OpenAPI 3.1 |
+
 ## 🏗 Architecture
 
 ```mermaid
@@ -96,18 +115,38 @@ flowchart TD
 
 ---
 
-## Run locally
-
-Copy the sample configuration and replace all development secrets before using this outside local development.
+## 🚀 Run Locally
 
 ```bash
+git clone https://github.com/zaytec/CryptoSage.git
+cd CryptoSage
+
 cp .env.example .env
+
 docker compose up --build
 ```
 
-The API is available at `http://localhost:8000/docs`; Prometheus at `:9090`; and Grafana at `:3000`.
+## 🌐 Local Services
 
-For production, set `ENVIRONMENT=production`, a unique `SECRET_KEY`, explicit CORS origins, and non-default PostgreSQL credentials. The application refuses to start in production with the sample JWT secret or wildcard CORS.
+| Service | URL |
+|----------|-----|
+| Swagger UI | http://localhost:8000/docs |
+| Health Check | http://localhost:8000/health/live |
+| Readiness Check | http://localhost:8000/health/ready |
+| Prometheus | http://localhost:9090 |
+| Grafana | http://localhost:3000 |
+
+> **Production Note**
+>
+> Before deploying:
+>
+> - Set `ENVIRONMENT=production`
+> - Generate a strong `SECRET_KEY`
+> - Configure explicit CORS origins
+> - Use non-default PostgreSQL credentials
+> - Run `alembic upgrade head`
+> - Configure `/health/live` and `/health/ready` as health checks
+
 
 ## Core API
 
@@ -136,13 +175,23 @@ The suite covers authentication, caching, persistence, WebSockets, Celery tasks,
 ---
 
 ## 📚 Documentation
-
-Additional documentation is available in the `docs/` directory.
-
 | Guide | Description |
 |-------|-------------|
-| Architecture | System design and component interactions |
-| API | Endpoint reference |
-| Deployment | Production deployment guide |
-| Benchmarks | Performance measurements |
-| Release Notes | Version history |
+| [Architecture](docs/ARCHITECTURE.md) | System design and component interactions |
+| [API Reference](docs/API.md) | Endpoint reference |
+| [Deployment Guide](docs/DEPLOYMENT.md) | Production deployment guide |
+| [Benchmarks](docs/BENCHMARKS.md) | Performance measurements |
+| [Release Notes](docs/RELEASE_NOTES.md) | Version history |
+
+
+
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+---
+
+Built with ❤️ using FastAPI, PostgreSQL, Redis, Celery, Docker, Prometheus, and Grafana.
