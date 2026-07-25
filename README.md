@@ -52,7 +52,44 @@ Rather than serving as a simple CRUD application, CryptoSage focuses on producti
 - 🧪 16 automated tests with 92%+ coverage
 
 ---
+## 🏗 Architecture
 
+```mermaid
+flowchart TD
+
+    Client["Client / Frontend"]
+
+    API["FastAPI API"]
+
+    Auth["JWT Authentication"]
+
+    Redis["Redis Cache"]
+
+    Postgres["PostgreSQL"]
+
+    Celery["Celery Worker"]
+
+    Beat["Celery Beat"]
+
+    CoinGecko["CoinGecko API"]
+
+    Prom["Prometheus"]
+
+    Grafana["Grafana"]
+
+    Client --> API
+
+    API --> Auth
+    API --> Redis
+    API --> Postgres
+    API --> CoinGecko
+
+    API --> Celery
+    Beat --> Celery
+
+    API --> Prom
+    Prom --> Grafana
+```
 ## 📸 API Preview
 
 ![Swagger UI](assets/swagger-ui.png)
