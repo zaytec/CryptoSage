@@ -25,18 +25,20 @@ Built with **FastAPI • PostgreSQL • Redis • Celery • Docker • Promethe
 
 ## Contents
 
-- [Overview](#-overview)
-- [Highlights](#-highlights)
-- [Architecture](#-architecture)
-- [API Preview](#-api-preview)
-- [Run Locally](#-run-locally)
-- [Core API](#-core-api)
-- [Operations](#-operations)
-- [Quality Checks](#-quality-checks)
-- [Documentation](#-documentation)
-
+- [Overview](#overview)
+- [Highlights](#highlights)
+- [Repository Metrics](#repository-metrics)
+- [Architecture](#architecture)
+- [API Preview](#api-preview)
+- [Run Locally](#run-locally)
+- [Local Services](#local-services)
+- [Core API](#core-api)
+- [Operations](#operations)
+- [Quality Checks](#quality-checks)
+- [Documentation](#documentation)
+- [Support](#support)
   
-## 📖 Overview
+## Overview
 
 CryptoSage is a production-ready cryptocurrency analytics platform built to demonstrate modern backend engineering practices.
 
@@ -46,7 +48,7 @@ Rather than serving as a simple CRUD application, CryptoSage focuses on producti
 
 ---
 
-## ✨ Highlights
+## Highlights
 
 - 🔐 JWT authentication with Argon2 password hashing and refresh tokens
 - 🚀 Redis cache-aside strategy with scheduled invalidation
@@ -60,7 +62,7 @@ Rather than serving as a simple CRUD application, CryptoSage focuses on producti
 
 ---
 
-## 📊 Repository Metrics
+## Repository Metrics
 
 | Metric | Value |
 |--------|------:|
@@ -71,7 +73,7 @@ Rather than serving as a simple CRUD application, CryptoSage focuses on producti
 | Docker Services | 7 |
 | API Documentation | OpenAPI 3.1 |
 
-## 🏗 Architecture
+## Architecture
 
 ```mermaid
 flowchart TD
@@ -109,13 +111,13 @@ flowchart TD
     API --> Prom
     Prom --> Grafana
 ```
-## 📸 API Preview
+## API Preview
 
 ![Swagger UI](assets/swagger-ui.png)
 
 ---
 
-## 🚀 Run Locally
+## Run Locally
 
 ```bash
 git clone https://github.com/zaytec/CryptoSage.git
@@ -126,7 +128,7 @@ cp .env.example .env
 docker compose up --build
 ```
 
-## 🌐 Local Services
+## Local Services
 
 | Service | URL |
 |----------|-----|
@@ -147,7 +149,6 @@ docker compose up --build
 > - Run `alembic upgrade head`
 > - Configure `/health/live` and `/health/ready` as health checks
 
-
 ## Core API
 
 - `POST /api/v1/auth/register`, `/token`, `/refresh`
@@ -162,10 +163,10 @@ Market data is cached with endpoint-appropriate TTLs (60 seconds for prices, 180
 
 Run schema migrations with `alembic upgrade head`. The Compose stack starts API, Celery worker/beat, PostgreSQL, Redis, Prometheus, and Grafana. Put the provided NGINX configuration in front of the API in an internet-facing deployment. Railway and AWS deployments should supply all values from `.env.example` through their secret managers, run `alembic upgrade head` as a release command, and expose `/health/live` and `/health/ready` to the platform health checks.
 
-## Quality checks
+## Quality Checks
 
 ```bash
-pip install -e '.[dev]'
+pip install -e ".[dev]"
 ruff check .
 pytest
 docker compose config
@@ -174,7 +175,8 @@ docker compose config
 The suite covers authentication, caching, persistence, WebSockets, Celery tasks, and health/metrics. The release baseline is 16 passing tests and 92.07% coverage. Actual local benchmark results are documented in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 ---
 
-## 📚 Documentation
+## Documentation
+
 | Guide | Description |
 |-------|-------------|
 | [Architecture](docs/ARCHITECTURE.md) | System design and component interactions |
@@ -188,7 +190,7 @@ The suite covers authentication, caching, persistence, WebSockets, Celery tasks,
 
 ---
 
-## ⭐ Support
+## Support
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
 
