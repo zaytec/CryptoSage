@@ -133,3 +133,16 @@ docker compose config
 ```
 
 The suite covers authentication, caching, persistence, WebSockets, Celery tasks, and health/metrics. The release baseline is 16 passing tests and 92.07% coverage. Actual local benchmark results are documented in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+---
+
+## 📚 Documentation
+
+Additional documentation is available in the `docs/` directory.
+
+| Guide | Description |
+|-------|-------------|
+| Architecture | System design and component interactions |
+| API | Endpoint reference |
+| Deployment | Production deployment guide |
+| Benchmarks | Performance measurements |
+| Release Notes | Version history |
