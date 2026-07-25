@@ -18,6 +18,17 @@ Built with **FastAPI • PostgreSQL • Redis • Celery • Docker • Promethe
 
 ---
 
+## Contents
+
+- [Overview](#-overview)
+- [Highlights](#-highlights)
+- [Architecture](#-architecture)
+- [API Preview](#-api-preview)
+- [Run Locally](#-run-locally)
+- [Core API](#-core-api)
+- [Operations](#-operations)
+- [Quality Checks](#-quality-checks)
+- [Documentation](#-documentation)
 ## 📖 Overview
 
 CryptoSage is a production-ready cryptocurrency analytics platform built to demonstrate modern backend engineering practices.
