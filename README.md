@@ -1,16 +1,52 @@
-# CryptoSage
+# 🚀 CryptoSage
 
-CryptoSage v1.0.0 is a cryptocurrency analytics API built with FastAPI, async SQLAlchemy, PostgreSQL, Redis, Celery, WebSockets, Prometheus, and Docker.
+<div align="center">
 
-## Highlights
+### Production-ready Cryptocurrency Analytics Backend
 
-- JWT authentication with Argon2 password hashing and refresh tokens.
-- Redis cache-aside strategy for market data, with cache statistics and scheduled invalidation.
-- Portfolio transactions, cost basis, holdings valuation, and unrealized P&L.
-- Async CoinGecko integration, WebSocket market stream, and Celery maintenance jobs.
-- PostgreSQL migrations, health probes, Prometheus metrics, Grafana, NGINX, Docker Compose, and CI.
+Built with **FastAPI • PostgreSQL • Redis • Celery • Docker • Prometheus • Grafana**
 
-Detailed material is available in [architecture](docs/ARCHITECTURE.md), [API documentation](docs/API.md), [deployment guide](docs/DEPLOYMENT.md), [benchmark report](docs/BENCHMARKS.md), and [release notes](docs/RELEASE_NOTES.md).
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.139-009688?logo=fastapi)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)
+![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)
+![Tests](https://img.shields.io/badge/Tests-16_Passing-success)
+![Coverage](https://img.shields.io/badge/Coverage-92%25-brightgreen)
+
+</div>
+
+---
+
+## 📖 Overview
+
+CryptoSage is a production-ready cryptocurrency analytics platform built to demonstrate modern backend engineering practices.
+
+The project combines authentication, asynchronous APIs, PostgreSQL persistence, Redis caching, Celery background workers, Docker-based deployment, Prometheus metrics, and Grafana dashboards into a scalable backend architecture.
+
+Rather than serving as a simple CRUD application, CryptoSage focuses on production-ready design, observability, and maintainability.
+
+---
+
+## ✨ Highlights
+
+- 🔐 JWT authentication with Argon2 password hashing and refresh tokens
+- 🚀 Redis cache-aside strategy with scheduled invalidation
+- 📈 CoinGecko-powered cryptocurrency market intelligence
+- 📊 Portfolio analytics with holdings and unrealised P&L
+- 🔄 Celery workers for scheduled background processing
+- 📡 WebSocket market streaming
+- 📉 Prometheus metrics and Grafana dashboards
+- 🐳 Docker Compose deployment
+- 🧪 16 automated tests with 92%+ coverage
+
+---
+
+## 📸 API Preview
+
+![Swagger UI](assets/swagger-ui.png)
+
+---
 
 ## Run locally
 
